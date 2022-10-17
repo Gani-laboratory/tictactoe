@@ -33,6 +33,8 @@ function App() {
   let status
   if (winner) {
     status = `Winner: ${winner}`
+  } else if (current.squares.every((value) => value !== null)) {
+    status = 'Draw!'
   } else {
     status = `Next Player: ${state.xIsNext ? 'X' : 'O'}`
   }
@@ -53,7 +55,6 @@ function App() {
 function handleClick(state, setState, i) {
   const history = state.history.slice(0, state.stepNumber + 1)
   const current = history[history.length - 1]
-  console.log(current);
   const squares = current.squares.slice()
   if (calculateWinner(squares) || squares[i]) {
     return;
