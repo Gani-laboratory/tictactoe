@@ -3,12 +3,13 @@ import Square from "./Square"
 function Board(props) {
   let rows = Array.from(Array(3))
     rows = rows.map((v,i) => {
-      let square = Array.from(Array(3))
+      const square = Array.from(Array(3))
       return (
         <div className='board-row'>
           {
             square.map((x,y) => {
-              return <Square value={props.squares[3*i+y]} onClick={()=>props.onClick(3*i+y)} />
+              const index = 3*i+y
+              return <Square value={props.squares[index]} onClick={()=>props.onClick(index)} winner={props.winner && props.winner.includes(index)} />
             })
           }
         </div>
