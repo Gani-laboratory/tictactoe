@@ -2,11 +2,22 @@ import { useState } from "react";
 import Board from "./components/Board";
 import "./index.css";
 
+const horizontal = Array(3).fill(null)
+const vertical = Array(3).fill(null)
+const generateCoordinate = []
+horizontal.map((_,x) => {
+  return vertical.map((_,y) => {
+    generateCoordinate.push([x+1,y+1])
+    return _
+  })
+})
+
 function App() {
   const [state, setState] = useState({
     history: [
       {
         squares: Array(9).fill(null),
+        coordinate: Array(2).fill(null)
       }
     ],
     xIsNext: true,
@@ -18,7 +29,7 @@ function App() {
   const winner = calculateWinner(current.squares)
   const moves = state.history.map((_, move) => {
     const desc = move ?
-    `Go to move #${move}` :
+    `Go to move #${move} @ ${_.coordinate}` :
     'Go to game start'
     return (
       <li key={move}>
@@ -49,6 +60,7 @@ function App() {
   function handleClick(i) {
     const history = state.history.slice(0, state.stepNumber + 1)
     const current = history[history.length - 1]
+    const coordinate = generateCoordinate[i]
     const squares = current.squares.slice()
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -57,6 +69,7 @@ function App() {
     setState({
       history: history.concat([{
           squares,
+          coordinate
       }]),
       stepNumber: history.length,
       xIsNext: !state.xIsNext
