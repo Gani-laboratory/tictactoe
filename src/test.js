@@ -9,7 +9,10 @@ const test = lines.map((_, x) => {
     if (x < 3) {
       return 3*x+y
     } else if (x < 6) {
-      // return y*x // belum tersolve
+      if (x !== 3) {
+        return (3*y)+(x === 4 ? 1 : 2)
+      }
+      return 3*y
     } else if (x < 7) {
       return x%2+(y*2)*2
     }
