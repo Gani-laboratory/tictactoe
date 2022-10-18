@@ -2,16 +2,6 @@ import { useState } from "react";
 import Board from "./components/Board";
 import "./index.css";
 
-const horizontal = Array(3).fill(null)
-const vertical = Array(3).fill(null)
-const generateCoordinate = []
-horizontal.map((_,x) => {
-  return vertical.map((_,y) => {
-    generateCoordinate.push([x+1,y+1])
-    return _
-  })
-})
-
 function App() {
   const [state, setState] = useState({
     history: [
@@ -58,6 +48,16 @@ function App() {
   }
 
   function handleClick(i) {
+    const horizontal = Array(3).fill(null)
+    const vertical = Array(3).fill(null)
+    const generateCoordinate = []
+    horizontal.map((_,x) => {
+      return vertical.map((_,y) => {
+        generateCoordinate.push([x+1,y+1])
+        return _
+      })
+    })
+    
     const history = state.history.slice(0, state.stepNumber + 1)
     const current = history[history.length - 1]
     const coordinate = generateCoordinate[i]
