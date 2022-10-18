@@ -10,7 +10,8 @@ function App() {
       }
     ],
     xIsNext: true,
-    stepNumber: 0
+    stepNumber: 0,
+    isDescending: false
   })
 
   const current = state.history[state.stepNumber]
@@ -38,35 +39,42 @@ function App() {
   } else {
     status = `Next Player: ${state.xIsNext ? 'X' : 'O'}`
   }
+  function sortHistory() {
+    setState({
+      ...state,
+      isDescending: !state.isDescending
+    })
+  }
+
+  function handleClick(i) {
+    const history = state.history.slice(0, state.stepNumber + 1)
+    const current = history[history.length - 1]
+    const squares = current.squares.slice()
+    if (calculateWinner(squares) || squares[i]) {
+      return;
+    }
+    squares[i] = state.xIsNext ? 'X' : 'O';
+    setState({
+      history: history.concat([{
+          squares,
+      }]),
+      stepNumber: history.length,
+      xIsNext: !state.xIsNext
+    })
+  }
 
   return (
     <div className="game">
       <div className="game-board">
-        <Board squares={current.squares} onClick={(i)=>handleClick(state, setState, i)} winner={winner ? winner.lines : false} />
+        <Board squares={current.squares} onClick={(i)=>handleClick(i)} winner={winner ? winner.lines : false} />
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <ol>{moves}</ol>
+        <ol>{state.isDescending ? moves.reverse() : moves}</ol>
+        <button onClick={()=>sortHistory()}>{state.isDescending ? 'Ascending' : 'Descending'}</button>
       </div>
     </div>
   );
-}
-
-function handleClick(state, setState, i) {
-  const history = state.history.slice(0, state.stepNumber + 1)
-  const current = history[history.length - 1]
-  const squares = current.squares.slice()
-  if (calculateWinner(squares) || squares[i]) {
-    return;
-  }
-  squares[i] = state.xIsNext ? 'X' : 'O';
-  setState({
-    history: history.concat([{
-        squares,
-    }]),
-    stepNumber: history.length,
-    xIsNext: !state.xIsNext
-  })
 }
 
 function calculateWinner(squares) {
