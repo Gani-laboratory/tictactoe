@@ -1,3 +1,7 @@
+// tentukan bilangan genap % 1
+// x%2+(y*2)*2 utk index 6
+// (x-1)%2+(y+1)*2 utk index 7
+
 const line = Array(3).fill(null)
 const lines = Array(8).fill(null)
 const test = lines.map((_, x) => {
@@ -5,9 +9,11 @@ const test = lines.map((_, x) => {
     if (x < 3) {
       return 3*x+y
     } else if (x < 6) {
-      return 3*y+x
+      // return y*x // belum tersolve
+    } else if (x < 7) {
+      return x%2+(y*2)*2
     }
-    return x%3*y
+    return (x-1)%2+(y+1)*2
   })
 })
 
