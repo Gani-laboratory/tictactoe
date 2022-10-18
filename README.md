@@ -1,1 +1,1 @@
-# Tic Tac Toe Apps Build With Reactjs
+# Tic Tac Toe Game Build With Reactjs
