@@ -17,7 +17,7 @@ function Game() {
   const current = state.history[state.stepNumber];
   const winner = calculateWinner(current.squares);
   const moves = state.history.map((_, move) => {
-    const desc = move ? `Go to move #${move} @ ${_.coordinate}` : "Go to game start";
+    const desc = move ? `#${move} Move @ ${_.coordinate}` : "Game start";
     return (
       <li key={move}>
         <button
@@ -83,14 +83,18 @@ function Game() {
   }
 
   return (
-    <div className="game">
-      <div className="game-board">
+    <div className="flex justify-center items-center gap-5 h-full absolute w-full">
+      <div>
         <Board squares={current.squares} onClick={(i) => handleClick(i)} winner={winner ? winner.lines : false} />
       </div>
-      <div className="game-info">
-        <div>{status}</div>
+      <div className="flex flex-col gap-3">
+        <div className="flex gap-3">
+          <button className="p-3 rounded-full bg-slate-300" onClick={() => sortHistory()}>
+            {state.isDescending ? "Ascending" : "Descending"}
+          </button>
+          <div>{status}</div>
+        </div>
         <ol>{state.isDescending ? moves.reverse() : moves}</ol>
-        <button onClick={() => sortHistory()}>{state.isDescending ? "Ascending" : "Descending"}</button>
       </div>
     </div>
   );
