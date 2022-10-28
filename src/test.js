@@ -2,25 +2,25 @@
 // x%2+(y*2)*2 utk index 6
 // (x-1)%2+(y+1)*2 utk index 7
 
-const line = Array(3).fill(null)
-const lines = Array(8).fill(null)
-const test = lines.map((_, x) => {
-  return line.map((_, y) => {
-    if (x < 3) {
-      return 3*x+y
-    } else if (x < 6) {
-      if (x !== 3) {
-        return (3*y)+(x === 4 ? 1 : 2)
-      }
-      return 3*y
-    } else if (x < 7) {
-      return x%2+(y*2)*2
-    }
-    return (x-1)%2+(y+1)*2
-  })
-})
+// const line = Array(3).fill(null)
+// const lines = Array(8).fill(null)
+// const test = lines.map((_, x) => {
+//   return line.map((_, y) => {
+//     if (x < 3) {
+//       return 3*x+y
+//     } else if (x < 6) {
+//       if (x !== 3) {
+//         return (3*y)+(x === 4 ? 1 : 2)
+//       }
+//       return 3*y
+//     } else if (x < 7) {
+//       return x%2+(y*2)*2
+//     }
+//     return (x-1)%2+(y+1)*2
+//   })
+// })
 
-console.log(test);
+// console.log(test);
 
 // example result:
 // [
@@ -33,3 +33,12 @@ console.log(test);
 //   [0, 4, 8],
 //   [2, 4, 6]
 // ]
+
+let i = 0
+const line_counter = (reset = false) => {
+	if(reset) i = 0
+	return ++i
+};
+
+const lineToWin = Array(3).fill(null).map((v) => line_counter())
+
