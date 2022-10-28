@@ -34,11 +34,9 @@
 //   [2, 4, 6]
 // ]
 
-let i = 0
-const line_counter = (reset = false) => {
-	if(reset) i = 0
-	return ++i
-};
+const line_counter = ((i = 0) => (reset = false) => reset ? (i = 1) : ++i)();
 
-const lineToWin = Array(3).fill(null).map((v) => line_counter())
-
+const lineToWin = Array(3).fill(null).map(line_counter)
+console.log(lineToWin);
+console.log(line_counter(true));
+console.log(line_counter());
