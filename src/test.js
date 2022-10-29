@@ -34,9 +34,16 @@
 //   [2, 4, 6]
 // ]
 
-const line_counter = ((i = 0) => (reset = false) => reset ? (i = 1) : ++i)();
+// rule of tictactoe:
+// yang memulai memiliki kesempatan maksimal 5 gerakan dan lawannya 4 gerakan
+// peluang kemenangan = draw jika musuh dan pemain sama2 expert
+const lines = Array(9)
+.fill(null).map((_, i) => i+1)
 
-const lineToWin = Array(3).fill(null).map(line_counter)
-console.log(lineToWin);
-console.log(line_counter(true));
-console.log(line_counter());
+const filledSquare = [
+	"X", "X", "O",
+	"O", "X", "O",
+	"X", "O", "X"
+]
+
+console.log(lines);
